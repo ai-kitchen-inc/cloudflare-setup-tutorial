@@ -164,6 +164,50 @@ ssh myserver
 
 ---
 
+---
+
+## No Custom Domain? Use a Quick Tunnel
+
+If you don't own a domain, Cloudflare provides **Quick Tunnels** — free, temporary subdomains on `trycloudflare.com`. No account, no DNS setup required.
+
+### Start a Quick Tunnel (Web)
+
+```bash
+cloudflared tunnel --url http://localhost:3000
+```
+
+Cloudflare assigns a random URL like:
+
+```
+https://random-words-here.trycloudflare.com
+```
+
+Share that URL and it proxies directly to your local service. The URL changes every time you restart.
+
+### Limitations of Quick Tunnels
+
+| Feature | Quick Tunnel | Named Tunnel (custom domain) |
+|---|---|---|
+| Custom hostname | ✗ Random subdomain | ✓ |
+| Persistent URL | ✗ Changes on restart | ✓ |
+| SSH support | ✗ HTTP/HTTPS only | ✓ |
+| Cloudflare Access policies | ✗ | ✓ |
+| Runs as a service | ✗ | ✓ |
+
+> Quick Tunnels are good for temporary sharing or testing. For persistent access or SSH, a custom domain is required.
+
+### Get a Free Domain
+
+If you want a permanent setup without paying for a domain, several registrars offer free domains:
+
+- **[Cloudflare Registrar](https://www.cloudflare.com/products/registrar/)** — at-cost pricing (~$8–10/yr for `.com`), no markup
+- **Freenom** — free `.tk`, `.ml`, `.ga` domains (availability varies)
+- **GitHub Student Pack** — includes a free `.me` domain via Namecheap for students
+
+Once you have any domain, point its nameservers to Cloudflare (free plan) and follow the main guide from Step 2.
+
+---
+
 ## Troubleshooting
 
 **ProxyCommand not picked up:**
